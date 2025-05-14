@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)file:///C:/Users/djask/Downloads/emotion_map_lang_toggle%20(1).html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Emotion Open Source Map</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./Emotion Open Source Map_files/leaflet.css">
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; }
+    #map { height: 80vh; }
+    #form-container {
+      padding: 10px;
+      background: #f8f9fa;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    input, select, button {
+      padding: 8px;
+      font-size: 14px;
+    }
+    #qr-section {
+      padding: 10px;
+      text-align: center;
+    }
+    #qr-section img {
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body class="">
+
+  <div id="form-container">
+    <select id="languageToggle" onchange="toggleLanguage()">
+      <option value="ko">한국어</option>
+      <option value="en">English</option>
+    </select>
+    <input type="text" id="nicknameInput" placeholder="닉네임" size="10">
+    <input type="text" id="lyricInput" placeholder="가사 한 줄을 입력하세요" size="40">
+    <select id="colorSelect">
+      <option value="red">빨간색</option>
+      <option value="blue">파란색</option>
+      <option value="green">초록색</option>
+      <option value="pink">핑크색</option>
+      <option value="yellow">노란색</option>
+      <option value="purple">보라색</option>
+      <option value="white">하얀색</option>
+    </select>
+    <input type="text" id="searchInput" placeholder="주소 또는 장소명 검색" size="25">
+    <button id="searchBtn" onclick="searchLocation()">검색</button>
+    <button id="addBtn" onclick="addLyric()">지도에 추가</button>
+  </div>
+
+  <div id="map" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0" style="position: relative; outline-style: none;"><div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(499.066px, -44.0245px, 0px);"><div class="leaflet-pane leaflet-tile-pane"><div class="leaflet-layer " style="z-index: 1; opacity: 1;"><div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 18; transform: translate3d(-3px, 297px, 0px) scale(1);"><img alt="" src="./Emotion Open Source Map_files/99.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(251px, -135px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/98.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(251px, -391px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/99(1).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-5px, -135px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/99(2).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(507px, -135px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/100.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(251px, 121px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/98(1).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-5px, -391px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/98(2).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(507px, -391px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/100(1).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-5px, 121px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/100(2).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(507px, 121px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/99(3).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-261px, -135px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/99(4).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(763px, -135px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/98(3).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-261px, -391px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/98(4).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(763px, -391px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/100(3).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-261px, 121px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/100(4).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(763px, 121px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/99(5).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-517px, -135px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/99(6).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(1019px, -135px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/98(5).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-517px, -391px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/98(6).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(1019px, -391px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/100(5).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-517px, 121px, 0px); opacity: 1;"><img alt="" src="./Emotion Open Source Map_files/100(6).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(1019px, 121px, 0px); opacity: 1;"></div><div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 17; transform: translate3d(-384px, 132px, 0px) scale(2);"></div></div></div><div class="leaflet-pane leaflet-overlay-pane"></div><div class="leaflet-pane leaflet-shadow-pane"></div><div class="leaflet-pane leaflet-marker-pane"><img src="./Emotion Open Source Map_files/chart" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker" tabindex="0" role="button" style="margin-left: -10px; margin-top: -34px; width: 21px; height: 34px; transform: translate3d(362px, 581px, 0px); z-index: 581;"><img src="./Emotion Open Source Map_files/chart(1)" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker" tabindex="0" role="button" style="margin-left: -10px; margin-top: -34px; width: 21px; height: 34px; transform: translate3d(67px, 200px, 0px); z-index: 200;"><img src="./Emotion Open Source Map_files/chart(1)" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker" tabindex="0" role="button" style="margin-left: -10px; margin-top: -34px; width: 21px; height: 34px; transform: translate3d(417px, 151px, 0px); z-index: 151;"><img src="./Emotion Open Source Map_files/chart(1)" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker" tabindex="0" role="button" style="margin-left: -10px; margin-top: -34px; width: 21px; height: 34px; transform: translate3d(75px, 191px, 0px); z-index: 191;"><img src="./Emotion Open Source Map_files/chart(1)" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker" tabindex="0" role="button" style="margin-left: -10px; margin-top: -34px; width: 21px; height: 34px; transform: translate3d(188px, 258px, 0px); z-index: 258;"><img src="./Emotion Open Source Map_files/chart(1)" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker" tabindex="0" role="button" style="margin-left: -10px; margin-top: -34px; width: 21px; height: 34px; transform: translate3d(92px, 369px, 0px); z-index: 369;"><img src="./Emotion Open Source Map_files/chart(1)" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker" tabindex="0" role="button" style="margin-left: -10px; margin-top: -34px; width: 21px; height: 34px; transform: translate3d(367px, 371px, 0px); z-index: 371;"><img src="./Emotion Open Source Map_files/chart(1)" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker" tabindex="0" role="button" style="margin-left: -10px; margin-top: -34px; width: 21px; height: 34px; transform: translate3d(150px, 478px, 0px); z-index: 478;"><img src="./Emotion Open Source Map_files/chart(1)" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker" tabindex="0" role="button" style="margin-left: -10px; margin-top: -34px; width: 21px; height: 34px; transform: translate3d(380px, 458px, 0px); z-index: 458;"></div><div class="leaflet-pane leaflet-tooltip-pane"></div><div class="leaflet-pane leaflet-popup-pane"><div class="leaflet-popup  leaflet-zoom-animated" style="opacity: 1; transform: translate3d(362px, 581px, 0px); bottom: -7px; left: -174px;"><div class="leaflet-popup-content-wrapper"><div class="leaflet-popup-content" style="width: 301px;"><b>한로로</b>: 차가웠던 여름도 울어버린 가을도 남기지 못해 멍든 겨울을 난 안을래요</div></div><div class="leaflet-popup-tip-container"><div class="leaflet-popup-tip"></div></div><a class="leaflet-popup-close-button" role="button" aria-label="Close popup" href="file:///C:/Users/djask/Downloads/emotion_map_lang_toggle%20(1).html#close"><span aria-hidden="true">×</span></a></div><div class="leaflet-popup  leaflet-zoom-animated" style="opacity: 1; transform: translate3d(67px, 200px, 0px); bottom: -7px; left: -174px;"><div class="leaflet-popup-content-wrapper"><div class="leaflet-popup-content" style="width: 301px;"><b>나상현씨밴드</b>: 놓쳐버린 그 마음도 지나쳤던 사랑도 다 안고 가야지</div></div><div class="leaflet-popup-tip-container"><div class="leaflet-popup-tip"></div></div><a class="leaflet-popup-close-button" role="button" aria-label="Close popup" href="file:///C:/Users/djask/Downloads/emotion_map_lang_toggle%20(1).html#close"><span aria-hidden="true">×</span></a></div><div class="leaflet-popup  leaflet-zoom-animated" style="opacity: 1; transform: translate3d(417px, 151px, 0px); bottom: -7px; left: -102px;"><div class="leaflet-popup-content-wrapper"><div class="leaflet-popup-content" style="width: 158px;"><b>혁오</b>: everyday is yesterday</div></div><div class="leaflet-popup-tip-container"><div class="leaflet-popup-tip"></div></div><a class="leaflet-popup-close-button" role="button" aria-label="Close popup" href="file:///C:/Users/djask/Downloads/emotion_map_lang_toggle%20(1).html#close"><span aria-hidden="true">×</span></a></div><div class="leaflet-popup  leaflet-zoom-animated" style="opacity: 1; transform: translate3d(75px, 191px, 0px); bottom: -7px; left: -164px;"><div class="leaflet-popup-content-wrapper"><div class="leaflet-popup-content" style="width: 281px;"><b>드래곤포니</b>: 마침내 찾게 된 곳이 또 다른 멸망이라도</div></div><div class="leaflet-popup-tip-container"><div class="leaflet-popup-tip"></div></div><a class="leaflet-popup-close-button" role="button" aria-label="Close popup" href="file:///C:/Users/djask/Downloads/emotion_map_lang_toggle%20(1).html#close"><span aria-hidden="true">×</span></a></div><div class="leaflet-popup  leaflet-zoom-animated" style="opacity: 1; transform: translate3d(188px, 258px, 0px); bottom: -7px; left: -111px;"><div class="leaflet-popup-content-wrapper"><div class="leaflet-popup-content" style="width: 176px;"><b>장기하</b>: ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</div></div><div class="leaflet-popup-tip-container"><div class="leaflet-popup-tip"></div></div><a class="leaflet-popup-close-button" role="button" aria-label="Close popup" href="file:///C:/Users/djask/Downloads/emotion_map_lang_toggle%20(1).html#close"><span aria-hidden="true">×</span></a></div><div class="leaflet-popup  leaflet-zoom-animated" style="opacity: 1; transform: translate3d(92px, 369px, 0px); bottom: -7px; left: -114px;"><div class="leaflet-popup-content-wrapper"><div class="leaflet-popup-content" style="width: 182px;"><b>단편선 순간들</b>: 손 뼈 축축 숲 태양</div></div><div class="leaflet-popup-tip-container"><div class="leaflet-popup-tip"></div></div><a class="leaflet-popup-close-button" role="button" aria-label="Close popup" href="file:///C:/Users/djask/Downloads/emotion_map_lang_toggle%20(1).html#close"><span aria-hidden="true">×</span></a></div><div class="leaflet-popup  leaflet-zoom-animated" style="opacity: 1; transform: translate3d(367px, 371px, 0px); bottom: -7px; left: -147px;"><div class="leaflet-popup-content-wrapper"><div class="leaflet-popup-content" style="width: 247px;"><b>송소희</b>: 마음을노오오오오오옿아아아아아아아</div></div><div class="leaflet-popup-tip-container"><div class="leaflet-popup-tip"></div></div><a class="leaflet-popup-close-button" role="button" aria-label="Close popup" href="file:///C:/Users/djask/Downloads/emotion_map_lang_toggle%20(1).html#close"><span aria-hidden="true">×</span></a></div><div class="leaflet-popup  leaflet-zoom-animated" style="opacity: 1; transform: translate3d(150px, 478px, 0px); bottom: -7px; left: -149px;"><div class="leaflet-popup-content-wrapper"><div class="leaflet-popup-content" style="width: 252px;"><b>윤마치</b>: 이 휘날리는 백기 하나 누가 뭐라 할까?</div></div><div class="leaflet-popup-tip-container"><div class="leaflet-popup-tip"></div></div><a class="leaflet-popup-close-button" role="button" aria-label="Close popup" href="file:///C:/Users/djask/Downloads/emotion_map_lang_toggle%20(1).html#close"><span aria-hidden="true">×</span></a></div><div class="leaflet-popup  leaflet-zoom-animated" style="opacity: 1; transform: translate3d(380px, 458px, 0px); bottom: -7px; left: -80px;"><div class="leaflet-popup-content-wrapper"><div class="leaflet-popup-content" style="width: 114px;"><b>ADOY</b>: I am a lover</div></div><div class="leaflet-popup-tip-container"><div class="leaflet-popup-tip"></div></div><a class="leaflet-popup-close-button" role="button" aria-label="Close popup" href="file:///C:/Users/djask/Downloads/emotion_map_lang_toggle%20(1).html#close"><span aria-hidden="true">×</span></a></div></div><div class="leaflet-proxy leaflet-zoom-animated" style="transform: translate3d(56077.4px, 25518px, 0px) scale(128);"></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="file:///C:/Users/djask/Downloads/emotion_map_lang_toggle%20(1).html#" title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">+</span></a><a class="leaflet-control-zoom-out" href="file:///C:/Users/djask/Downloads/emotion_map_lang_toggle%20(1).html#" title="Zoom out" role="button" aria-label="Zoom out" aria-disabled="false"><span aria-hidden="true">−</span></a></div></div><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-attribution leaflet-control"><a href="https://leafletjs.com/" title="A JavaScript library for interactive maps"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" class="leaflet-attribution-flag"><path fill="#4C7BE1" d="M0 0h12v4H0z"></path><path fill="#FFD500" d="M0 4h12v3H0z"></path><path fill="#E0BC00" d="M0 7h12v1H0z"></path></svg> Leaflet</a> <span aria-hidden="true">|</span> © OpenStreetMap contributors</div></div></div></div>
+
+  <div id="qr-section">
+    <p id="qrLabel">📱 QR을 스캔해서 참여해보세요!</p>
+    <img src="./Emotion Open Source Map_files/saved_resource" alt="QR 코드">
+  </div>
+
+  <script src="./Emotion Open Source Map_files/leaflet.js.다운로드"></script>
+  <script>
+    const map = L.map('map').setView([36.5, 127.5], 7);
+    const markers = [];
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    function getColorIcon(color) {
+      return new L.Icon({
+        iconUrl: `https://chart.googleapis.com/chart?chst=d_map_pin_icon&chld=music|${color}`,
+        iconSize: [21, 34],
+        iconAnchor: [10, 34],
+        popupAnchor: [0, -34]
+      });
+    }
+
+    function addLyric() {
+      const lyric = document.getElementById('lyricInput').value.trim();
+      const nickname = document.getElementById('nicknameInput').value.trim();
+      const color = document.getElementById('colorSelect').value;
+
+      if (!lyric || !currentLocation) {
+        alert(currentLang === 'en' ? 'Please enter both lyric and location.' : '가사와 위치를 모두 입력해 주세요.');
+        return;
+      }
+
+      const entry = {
+        lat: currentLocation[0],
+        lng: currentLocation[1],
+        lyric,
+        nickname,
+        color
+      };
+
+      saveEntry(entry);
+      addMarker(entry);
+
+      document.getElementById('lyricInput').value = '';
+      document.getElementById('nicknameInput').value = '';
+    }
+
+    function addMarker(entry) {
+      const icon = getColorIcon(entry.color);
+      const popupText = entry.nickname ? `<b>${entry.nickname}</b>: ${entry.lyric}` : entry.lyric;
+
+      const popup = L.popup({ autoClose: false, closeOnClick: false })
+        .setLatLng([entry.lat, entry.lng])
+        .setContent(popupText)
+        .addTo(map);
+
+      const marker = L.marker([entry.lat, entry.lng], { icon }).addTo(map);
+      markers.push(marker);
+    }
+
+    function saveEntry(entry) {
+      const data = JSON.parse(localStorage.getItem('emotionPins') || '[]');
+      data.push(entry);
+      localStorage.setItem('emotionPins', JSON.stringify(data));
+    }
+
+    function loadEntries() {
+      const data = JSON.parse(localStorage.getItem('emotionPins') || '[]');
+      data.forEach(entry => addMarker(entry));
+    }
+
+    let currentLocation = null;
+
+    function searchLocation() {
+      const query = document.getElementById('searchInput').value.trim();
+      if (!query) {
+        alert(currentLang === 'en' ? 'Please enter a search term.' : '검색어를 입력해주세요.');
+        return;
+      }
+
+      fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.length > 0) {
+            const result = data[0];
+            const lat = parseFloat(result.lat);
+            const lon = parseFloat(result.lon);
+            currentLocation = [lat, lon];
+            map.setView(currentLocation, 15);
+
+            const temp = L.marker(currentLocation).addTo(map)
+              .bindPopup(currentLang === 'en' ? 'Selected Location' : '선택된 위치').openPopup();
+
+            setTimeout(() => map.removeLayer(temp), 1500);
+          } else {
+            alert(currentLang === 'en' ? 'No results found.' : '검색 결과가 없습니다.');
+          }
+        });
+    }
+
+    let currentLang = 'ko';
+    function toggleLanguage() {
+      const lang = document.getElementById('languageToggle').value;
+      currentLang = lang;
+
+      document.getElementById('nicknameInput').placeholder = lang === 'en' ? 'Nickname' : '닉네임';
+      document.getElementById('lyricInput').placeholder = lang === 'en' ? 'Enter a lyric line' : '가사 한 줄을 입력하세요';
+      document.getElementById('searchInput').placeholder = lang === 'en' ? 'Search address or place' : '주소 또는 장소명 검색';
+      document.getElementById('searchBtn').textContent = lang === 'en' ? 'Search' : '검색';
+      document.getElementById('addBtn').textContent = lang === 'en' ? 'Add to map' : '지도에 추가';
+      document.getElementById('qrLabel').textContent = lang === 'en' ? '📱 Scan the QR code to join!' : '📱 QR을 스캔해서 참여해보세요!';
+    }
+
+    loadEntries();
+  </script>
+
+
+
+</body></html>
